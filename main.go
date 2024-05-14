@@ -19,7 +19,7 @@ var client *firestore.Client
 func initFirestore() {
 	ctx := context.Background()
 	projectID := os.Getenv("GCP_PROJECT_ID")
-	sa := option.WithCredentialsFile("path/to/your/service-account-file.json")
+	sa := option.WithCredentialsFile("data/sa.json")
 
 	var err error
 	client, err = firestore.NewClient(ctx, projectID, sa)
@@ -64,7 +64,7 @@ func setupGraphQLSchema() graphql.Schema {
 						return nil, nil
 					}
 
-					doc, err := client.Collection("your-collection").Doc(id).Get(context.Background())
+					doc, err := client.Collection("tfmv").Doc(id).Get(context.Background())
 					if err != nil {
 						return nil, err
 					}
